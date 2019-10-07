@@ -25,3 +25,99 @@
 	* 不要使用table布局，因为table中某个元素旦触发了reflow，那么整个table的元素都会触发reflow。那么在不得已使用table的场合，可以设置table-layout:auto;或者是table-layout:fixed这样可以让table一行一行的渲染，这种做法也是为了限制reflow的影响范围
 
 
+* 实现深拷贝
+
+``` javascript
+// 取巧
+const liLei = {
+    name: 'lilei',
+    age: 28,
+    habits: ['coding', 'hiking', 'running']
+}
+
+const liLeiStr = JSON.stringify(liLei)
+const liLeiCopy = JSON.parse(liLeiStr)
+
+liLeiCopy.habits.splice(0, 1) 
+console.log('李雷副本的habits数组是', liLeiCopy.habits)
+console.log('李雷的habits数组是',  liLei.habits)
+
+
+// 递归
+function deepClone(obj) {
+    // 如果是值类型，则直接return
+    if(typeof obj !== 'object') {
+        return obj
+    }
+    
+    // 定义结果对象
+    let copy = {}
+    
+    // 如果对象是数组，则定义结果数组
+    if(obj.constructor === Array) {
+        copy = []
+    }
+    
+    // 遍历对象的key
+    for(let key in obj) {
+        // 如果key是对象的自有属性
+        if(obj.hasOwnProperty(key)) {
+            // 递归调用深拷贝方法
+            copy[key] = deepClone(obj[key])
+        }
+    }
+    
+    return copy
+} 
+
+
+
+// 使用循环的方法
+// 将 object 竖过来看当作一棵树  循环遍历一棵树，需要借助一个栈，当栈为空时就遍历完了，栈里面存储下一个需要拷贝的节点
+// 改用循环后，再也不会出现爆栈的问题了
+function cloneLoop(x) {
+    const root = {};
+
+    // 栈
+    const loopList = [
+        {
+            parent: root,
+            key: undefined,
+            data: x,
+        }
+    ];
+
+    while(loopList.length) {
+        // 深度优先
+        const node = loopList.pop();
+        const parent = node.parent;
+        const key = node.key;
+        const data = node.data;
+
+        // 初始化赋值目标，key为undefined则拷贝到父元素，否则拷贝到子元素
+        let res = parent;
+        if (typeof key !== 'undefined') {
+            res = parent[key] = {};
+        }
+
+        for(let k in data) {
+            if (data.hasOwnProperty(k)) {
+                if (typeof data[k] === 'object') {
+                    // 下一次循环
+                    loopList.push({
+                        parent: res,
+                        key: k,
+                        data: data[k],
+                    });
+                } else {
+                    res[k] = data[k];
+                }
+            }
+        }
+    }
+
+    return root;
+}
+```
+
+
