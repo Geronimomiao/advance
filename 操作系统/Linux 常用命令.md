@@ -10,5 +10,24 @@ netstat -nalp | grep 8080
 
 ps -ef | grep java
 ps -aux | grep java
+
+find /tmp/cg/testLinux -name "*.txt"
 ```
+
+![enter description here](https://img.wsmpage.cn/learning/2019-10-9/1570579978858.png)
+
+
+
+![enter description here](https://img.wsmpage.cn/learning/2019-10-9/1570580003869.png)
+
+
+![enter description here](https://img.wsmpage.cn/learning/2019-10-10/1570673446983.png)
+
+
+![](https://img.wsmpage.cn/learning/2019-10-10/1570673461571.png)
+
+
+
+
+
 
