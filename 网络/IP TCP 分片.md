@@ -34,3 +34,4 @@
 
 ![enter description here](https://img.wsmpage.cn/learning/2019-9-29/1569765403535.png)
 
+* SYN 是发起一个连接，ACK 是回复，RST 是重新连接，FIN 是结束连接
