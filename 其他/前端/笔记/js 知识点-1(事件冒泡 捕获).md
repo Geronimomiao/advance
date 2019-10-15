@@ -1,5 +1,5 @@
 ---
-title: js 知识点-1(事件冒泡 捕获)
+title: js 知识点-1(事件冒泡 捕获)(判断PC 移动端)
 time:  2019-10-12
 author: wsm
 mail: 1030057982@qq.com
@@ -19,3 +19,19 @@ mail: 1030057982@qq.com
 * 阻止事件冒泡
 	* e.stopPropagation(); 		
 
+
+
+**JS 判断是否为移动端**
+``` javascript
+function isMobile(){
+	if( navigator.userAgent.match(/Android/i)
+		|| navigator.userAgent.match(/webOS/i)
+		|| navigator.userAgent.match(/iPhone/i)
+		|| navigator.userAgent.match(/iPad/i)
+		|| navigator.userAgent.match(/iPod/i)
+		|| navigator.userAgent.match(/BlackBerry/i)
+		|| navigator.userAgent.match(/Windows Phone/i)
+	)return true;
+	return false;
+}
+```
