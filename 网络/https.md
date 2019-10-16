@@ -133,3 +133,6 @@ publicKey = (N, e) // N 是一个大整数 由两个质数相乘得到
 * 除了正常的tcp连接之外，还要建立ssl连接
 * 建立https需要花费时间(~0.3s)
 * 数据加密后比原信息更大，占用更多的带宽
+
+
+[推荐链接](https://www.jianshu.com/p/ae9761bec4db)
