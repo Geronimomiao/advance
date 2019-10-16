@@ -71,6 +71,7 @@ module.exports = {
 	* file-loader // 图片 字体等的打包
 	* raw-loader // 将文件以字符串的形式导入
 	* thread-loader // 多进程打包 css js
+	* url-loader // 图片是否打包为 base64
 
 ``` javascript
 module.exports = {
