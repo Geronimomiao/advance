@@ -7,6 +7,10 @@
 
 **Begin**
 
+```
+yarn add webpack webpack-cli
+```
+
 *  配置文件
 	* 默认 webpack.config.js
 	* webpack --config (可通过该命令指定配置文件
