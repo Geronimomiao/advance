@@ -134,7 +134,7 @@ devServer: {
 ==文件指纹策略==
 * 打包后 输出的文件后缀
 	* Hash: 和整个项目构建相关 只要项目文件修改 整个项目构建 hash 值 就会改变
-	* Chunkhash: 和 webpack 打包的 chunk 有关 不同的 entry  会生成不同的 chunkhash 值
+	* Chunkhash: 和 webpack 打包的 chunk 有关 不同的 entry  会生成不同的 chunkhash 值 未改动文件  chunkhash 值不变 更新项目时 未改动文件 不会失去缓存
 	* Contenthash: 根据文件内容定义 hash 文件内容不变 则 contenthash 不变
 
 
