@@ -39,6 +39,7 @@ github: https://github.com/Geronimomiao/advance
 > 2. String == Boolean，需要两个操作数同时转为Number。
 > 3. String/Boolean == Number，需要String/Boolean转为Number。
 > 4. Object == Primitive，需要Object转为Primitive(具体通过valueOf和toString方法)。
+> 5. Object == Boolean，需要Boolean转为Number  然后见3。
 
 [推荐网站](https://felix-kling.de/js-loose-comparison/)
 
