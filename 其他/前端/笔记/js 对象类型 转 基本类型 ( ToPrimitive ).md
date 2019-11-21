@@ -14,9 +14,11 @@ github: https://github.com/Geronimomiao/advance
 	* number
 	* string
 	* boolean 
-	* symbol ( ES6 新增 
+	
 * 对象值
 	* 除了原始值外，其他的所有值都是对象类型的值，包括数组(array)和函数(function)等 
+
+* symbol ( ES6 新增 
 
 ## ToPrimitive
 ****
