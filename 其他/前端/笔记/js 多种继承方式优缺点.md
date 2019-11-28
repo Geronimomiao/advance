@@ -60,8 +60,15 @@ function Parent () {
     this.names = ['kevin', 'daisy'];
 }
 
+// 该方法无法被继承
+// Parent.prototype.getName = function () {
+//   console.log(this.name);
+// }
+
 function Child () {
-    Parent.call(this);
+	// 当使用这个构造函数创建实例的时候，prototype属性指向的原型对象就成为实例的原型对象
+	// 此处仅调用 Parent 函数 用于包装 this
+    Parent.call(this); 
 }
 
 var child1 = new Child();
@@ -72,6 +79,7 @@ console.log(child2.names); // ["kevin", "daisy"]
 
 // 缺点
 // 方法都在构造函数中定义，每次创建实例都会创建一遍方法
+// 无法实现方法公用
 ```
 
 ## 组合继承
@@ -94,7 +102,9 @@ function Child (name, age) {
     this.age = age;
 }
 
-Child.prototype = new Parent(); // Child.prototype.constructor 指向 Parent
+Child.prototype = new Parent(); 
+// Child.prototype.constructor 指向 Parent
+// Child.prototype = Parent.prototype;
 Child.prototype.constructor = Child;
 
 var child1 = new Child('kevin', '18');
