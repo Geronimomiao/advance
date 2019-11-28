@@ -169,6 +169,20 @@ function createObj (o) {
 // 修正组合继承的弊端
 // Child.prototype = new Parent()  而是间接的让 Child.prototype 访问到 Parent.prototype
 
+function Parent (name) {
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
+}
+
+Parent.prototype.getName = function () {
+    console.log(this.name)
+}
+
+function Child (name, age) {
+    Parent.call(this, name);
+    this.age = age;
+}
+
 function object(o) {
     function F() {}
     F.prototype = o;
