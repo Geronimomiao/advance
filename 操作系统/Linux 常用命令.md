@@ -8,7 +8,7 @@ mail: 1030057982@qq.com
 ```
 netstat -nalp | grep 8080
 
-ps -ef | grep java
+ps -ef | grep java // ps 显示当前进程状态
 ps -aux | grep java
 
 find /tmp/cg/testLinux -name "*.txt"
