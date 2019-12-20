@@ -1,5 +1,5 @@
 ---
-title: 读书笔记/ES6函数式编程
+title: ES6函数式编程/1.md
 time:  2019-12-20
 author: wsm
 mail: 1030057982@qq.com
