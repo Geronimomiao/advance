@@ -119,9 +119,6 @@ setTimeout(function() {
 10
 12
 ```
-
-**过程如下图**
-![分析过程](https://img.wsmpage.cn/learning/2019-11-17/1573954940940.png)
 	   
 
 ****
