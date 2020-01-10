@@ -66,3 +66,9 @@ github: https://github.com/Geronimomiao/advance
 
 
 [推荐网站](https://github.com/jawil/blog/issues/5)
+
+
+```js
+console.log(([][[]]+[])[+!![]]+([]+{})[!+[]+!![]])  //  nb
+```
+
