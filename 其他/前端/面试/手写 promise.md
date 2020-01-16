@@ -47,6 +47,7 @@ myPromise.prototype.then=function(onFullfilled,onRejected){
     case "pending":
        promise2=new myPromise(function(resolve,reject){
          self.onFullfilledArray.push(function(){
+             // then方法返回的也是一个promise，也是一个异步的，这里用setTimeout包裹，使得then方法被调用后，不会阻塞后续的同步任务。
             setTimeout(function(){
               try {
                 let temple=onFullfilled(self.value);
