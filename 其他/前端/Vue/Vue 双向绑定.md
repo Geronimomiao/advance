@@ -2,6 +2,7 @@
 
 * 知道数据如何发生变化
   * Object.defineProperty
+  *  通过递归 object 属性
 ```js
 let car = {}
 let val = 3000
@@ -24,7 +25,7 @@ Object.defineProperty(car, 'price', {
   * 我们给每个数据都建一个依赖数组(因为一个数据可能被多处使用)，谁依赖了这个数据(即谁用到了这个数据)我们就把谁放入这个依赖数组中，那么当这个数据发生变化的时候，我们就去它对应的依赖数组中，把每个依赖都通知一遍 
 
 >  在getter中收集依赖，在setter中通知依赖更新
-
+> 谁用到了数据，谁就是依赖，我们就为谁创建一个Watcher实例。在之后数据变化时，我们不直接去通知依赖更新，而是通知依赖对应的Watch实例，由Watcher实例去通知真正的视图
 ```js
 export default class Dep {
   constructor () {
@@ -32,6 +33,7 @@ export default class Dep {
   }
 
   addSub (sub) {
+    //  每一个 sub  都是一个 watcher   实例
     this.subs.push(sub)
   }
   // 删除一个依赖
@@ -91,4 +93,57 @@ function defineReactive (obj,key,val) {
     }
   })
 }
+
+export default class Watcher {
+  constructor (vm,expOrFn,cb) {
+    this.vm = vm;
+    this.cb = cb;
+    this.getter = parsePath(expOrFn)
+    this.value = this.get()
+  }
+  get () {
+    window.target = this;
+    const vm = this.vm
+    let value = this.getter.call(vm, vm)
+    window.target = undefined;
+    return value
+  }
+  update () {
+    const oldValue = this.value
+    this.value = this.get()
+    this.cb.call(this.vm, this.value, oldValue)
+  }
+}
+
+/**
+ * Parse simple path.
+ * 把一个形如'data.a.b.c'的字符串路径所表示的值，从真实的data对象中取出来
+ * 例如：
+ * data = {a:{b:{c:2}}}
+ * parsePath('a.b.c')(data)  // 2
+ */
+const bailRE = /[^\w.$]/
+export function parsePath (path) {
+  if (bailRE.test(path)) {
+    return
+  }
+  const segments = path.split('.')
+  return function (obj) {
+    for (let i = 0; i < segments.length; i++) {
+      if (!obj) return
+      obj = obj[segments[i]]
+    }
+    return obj
+  }
+}
+
+```
+
+
+#### 总结
+```
+Data通过observer转换成了getter/setter的形式来追踪变化。
+当外界通过Watcher读取数据时，会触发getter从而将Watcher添加到依赖中。
+当数据发生了变化时，会触发setter，从而向Dep中的依赖（即Watcher）发送通知。
+Watcher接收到通知后，会向外界发送通知，变化通知到外界后可能会触发视图更新，也有可能触发用户的某个回调函数等。
 ```
