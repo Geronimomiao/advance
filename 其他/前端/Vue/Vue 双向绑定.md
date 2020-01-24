@@ -138,7 +138,9 @@ export function parsePath (path) {
 }
 
 ```
-
+ 
+ >  不足之处
+ >  虽然我们通过Object.defineProperty方法实现了对object数据的可观测，但是这个方法仅仅只能观测到object数据的取值及设置值，当我们向object数据里添加一对新的key/value或删除一对已有的key/value时，它是无法观测到的，导致当我们对object数据添加或删除值时，无法通知依赖，无法驱动视图进行响应式更新
 
 #### 总结
 ```
